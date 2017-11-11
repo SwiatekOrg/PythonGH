@@ -38,6 +38,7 @@ while liczba_kostek == "2":
             kostka2 = randint(1, 6)
             print("Wylosowales:")
             print(kostka1, kostka2)
+            print("Losowac jeszcze raz?")
             czy_losowac = input()
             if czy_losowac == "nie":
                 print("Exit")
