@@ -1,0 +1,10 @@
+print("Proszę o podanie wykrzyknienia")
+wykrzyknienie = input()
+print("Proszę o podanie przysłowka")
+przyslowek = input()
+print("Proszę o podanie rzeczownika")
+rzeczownik = input()
+print("Proszę o podanie przymiotnika")
+przymiotnik = input()
+calosc = wykrzyknienie +"! On powiedział " + przyslowek + " kiedy wskoczył do jego kontenera, " + rzeczownik + " i odłozył to na jego " + przymiotnik + " żonę."
+print(calosc)
