@@ -1,0 +1,20 @@
+#ZADANIE1
+equipmnent = {'sword': 1, 'bow':1 ,'arrow':20, 'knife':2}
+
+def showEq():
+    print(equipmnent)
+
+showEq()
+
+def addEq(name, count):
+    global equipmnent
+    if name in equipmnent.keys():
+        equipmnent[name] += count
+    else:
+        equipmnent[name] = count
+
+name = input()
+count = int(input())
+addEq(name, count)
+addEq("gold", 1000)
+showEq()
