@@ -1,0 +1,20 @@
+class Ekwipunek():
+    def __init__(self):
+        self.equipmnent = {'sword': 1, 'bow':1 ,'arrow':20, 'knife':2}
+
+    def showEq(self):
+        print(self.equipmnent)
+
+    def addEq(self,name, count):
+        self.name = {}
+        self.count = {}
+        if name in self.equipmnent.keys():
+            self.equipmnent[name] += count
+        else:
+            self.equipmnent[name] = count
+
+
+eq1 = Ekwipunek()
+eq1.showEq()
+eq1.addEq("cos", 5)
+eq1.showEq()
