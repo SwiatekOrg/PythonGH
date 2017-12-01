@@ -10,7 +10,7 @@ class Position():
         elif x == "poludnie":
             self._x += -1
         elif x == "wschod":
-             self_y += 1
+             self._y += 1
         elif x == "zachod":
              self._y += -1
         else:
