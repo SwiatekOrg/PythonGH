@@ -1,11 +1,15 @@
+
 class Player():
     def __init__(self):
         self._nickname = "Guest"
         self._gold = 100
+
     def chgnick(self, newnick):
         self._nickname = newnick
+
     def showNick(self):
         print("Twoj to " + self._nickname)
+
     def addGold(self ,gold):
         self._gold += gold
 
@@ -39,16 +43,20 @@ class Position():
         self._x = 50
         self._y = 50
         self._mapName = "Krakow"
+
     def move(self,x,y):
         self.x = int(x)
         self.y = int(y)
         self._x += self.x
         self._y += self.y
+
+
     def setPosition(self,x2,y3):
         self.x2 = int(x2)
         self.y3 = int(y3)
         self._x = x2
         self._y = y3
+
     def changeMap(self, mapname):
         self._mapName = mapname
 
