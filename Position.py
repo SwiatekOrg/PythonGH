@@ -38,7 +38,7 @@ class Position():
 pozycja_gracza = Position()
 
 while True:
-    print("W którą stronę ruch?(polnoc,poludnie,wschod,zachod)")
+    print("W którą stronę iść??(polnoc,poludnie,wschod,zachod)")
     x = input()
     pozycja_gracza.move(x)
 
