@@ -1,7 +1,7 @@
 class Position():
     def __init__(self):
-        self._x = 5
-        self._y = 5
+        self._x = 0
+        self._y = 0
         self._mapName = "Krakow"
 
     def move(self,x):
@@ -33,14 +33,43 @@ class Position():
         self._mapName = mapname
 
     def show(self):
-        print(self._x,self._y,self._mapName)
+        print(self._x ,self._y ,self._mapName)
 
+    def setPosition(self,x,y):
+        self._x = x
+        self._y = y
+
+class Ekwipunek():
+    def __init__(self):
+        self.equipmnent = {'sword': 1, 'bow':1 ,'arrow':20, 'knife':1}
+
+    def showEq(self):
+        print(self.equipmnent)
+
+    def addEq(self,name, count):
+        self.name = {}
+        self.count = {}
+        if name in self.equipmnent.keys():
+            self.equipmnent[name] += count
+        else:
+            self.equipmnent[name] = count
+
+ekwipunek_gracza = Ekwipunek()
 pozycja_gracza = Position()
-
+pozycja_gracza.setPosition(5,5)
+pozycja_przedmiotu = Position()
+pozycja_przedmiotu.setPosition(5,6)
+print(pozycja_przedmiotu.show(),pozycja_gracza.show())
 while True:
     print("W którą stronę iść?(polnoc,poludnie,wschod,zachod)")
     x = input()
     pozycja_gracza.move(x)
+    if pozycja_gracza == pozycja_przedmiotu:
+        ekwipunek_gracza.addEq("kartka", 1)
+        print("Znalazłeś kartkę!")
+    ekwipunek_gracza.showEq()
+
+
 
 
 

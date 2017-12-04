@@ -24,7 +24,6 @@ class Ekwipunek():
 
     def showEq(self):
         print(self.equipmnent)
-
     def addEq(self,name, count):
         self.name = {}
         self.count = {}
