@@ -2,7 +2,6 @@ class Position():
     def __init__(self):
         self._x = 0
         self._y = 0
-        self._mapName = "Krakow"
 
     def move(self,x):
         if x == "polnoc":
@@ -29,15 +28,15 @@ class Position():
             print("Podaj prawidłowy kierunek")
         print("Twoje polożenie to " + str(self._x) + "," + str(self._y))
 
-    def changeMap(self, mapname):
-        self._mapName = mapname
-
     def show(self):
-        print(self._x ,self._y ,self._mapName)
+        print(self._x ,self._y)
 
     def setPosition(self,x,y):
         self._x = x
         self._y = y
+
+    def _eq_(self, other):
+        return self._x == other._x and self._y == other._y
 
 class Ekwipunek():
     def __init__(self):
