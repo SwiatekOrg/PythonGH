@@ -1,9 +1,10 @@
+
 class Position():
     def __init__(self):
         self._x = 0
         self._y = 0
 
-    def move(self,x):
+    def move(self, x):
         if x == "polnoc":
             if self._x == 10 or self._x == 0:
                 print ("Nie mozesz wyjsc poza mapę")
@@ -67,8 +68,3 @@ while True:
         ekwipunek_gracza.addEq("kartka", 1)
         print("Znalazłeś kartkę!")
     ekwipunek_gracza.showEq()
-
-
-
-
-
