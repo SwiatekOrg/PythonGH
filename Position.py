@@ -56,36 +56,47 @@ class Ekwipunek():
         else:
             self.equipmnent[name] = count
 
+    def showValue(self,key):
+        if key in self.equipmnent:
+           print(self.equipmnent[key])
+        else:
+            print("0")
+
+
+
 ekwipunek_gracza = Ekwipunek()
 pozycja_gracza = Position()
 pozycja_gracza.setPosition(5,5)
 
-
-kartka1 = 0
-kartka2 = 0
-kartka3 = 0
-kartka4 = 0
+kartka1 = Position()
+kartka2 = Position()
+kartka3 = Position()
+kartka4 = Position()
 tablica_przedmiotow = [kartka1 , kartka2 , kartka3 , kartka4]
 
-
 i = 0
-for i in range(tablica_przedmiotow[0],tablica_przedmiotow[3]):
-    tablica_przedmiotow[i] = Position()
-    i = i + 1
-i = 0
-for i in range(tablica_przedmiotow[0],tablica_przedmiotow[3]):
+for i in range(0,len(tablica_przedmiotow)):
     tablica_przedmiotow[i].setPosition(randint(0,10),randint(0,10))
     i = i + 1
 
-print(tablica_przedmiotow[0].show())
+print("Kartki znajdują się na pozycjach(twoja to 5 5):")
+i = 0
+for i in range(0,len(tablica_przedmiotow)):
+    tablica_przedmiotow[i].show()
+    i = i + 1
+
+
+
 while True:
     print("W którą stronę iść?(polnoc,poludnie,wschod,zachod)")
     x = input()
     pozycja_gracza.move(x)
     i = 0
-    for i in range(tablica_przedmiotow[0],tablica_przedmiotow[3]):
+    for i in range(0,len(tablica_przedmiotow)):
         if pozycja_gracza == tablica_przedmiotow[i]:
             ekwipunek_gracza.addEq("kartka", 1)
-            print("Znalazłeś kartkę!")
-            i = i + 1
-    ekwipunek_gracza.showEq()
+            print("Znalazłeś kartkę! Masz już ")
+            ekwipunek_gracza.showValue('kartka')
+            print("kartek")
+        i = i + 1
+
