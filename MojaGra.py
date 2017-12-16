@@ -58,11 +58,7 @@ class Ekwipunek():
 
     def showValue(self,key):
         if key in self.equipmnent:
-           print(self.equipmnent[key])
-        else:
-            print("0")
-
-
+           return (self.equipmnent[key])
 
 ekwipunek_gracza = Ekwipunek()
 pozycja_gracza = Position()
@@ -85,8 +81,6 @@ for i in range(0,len(tablica_przedmiotow)):
     tablica_przedmiotow[i].show()
     i = i + 1
 
-
-
 while True:
     print("W którą stronę iść?(polnoc,poludnie,wschod,zachod)")
     x = input()
@@ -95,8 +89,6 @@ while True:
     for i in range(0,len(tablica_przedmiotow)):
         if pozycja_gracza == tablica_przedmiotow[i]:
             ekwipunek_gracza.addEq("kartka", 1)
-            print("Znalazłeś kartkę! Masz już ")
-            ekwipunek_gracza.showValue('kartka')
-            print("kartek")
+            print("Znalazłeś kartkę! Masz już "+str(ekwipunek_gracza.showValue('kartka')) + " kartek")
         i = i + 1
 
