@@ -2,6 +2,7 @@ from pad4pi import rpi_gpio
 import sys
 import max7219.led as led
 from luma.core.interface.serial import spi, noop
+from random import randint
 
 
 class Keyboard():
@@ -17,8 +18,8 @@ class Keyboard():
         self.ROW_PINS = [p1, p2, p3, p4]  # BCM numbering (GPIO.. number), first 4 pins
         self.COL_PINS = [p5, p6, p7, p8]  # next 4 left pins
 
-        self.x = 4
-        self.y = 4
+        self.x = randint(0,7)
+        self.y = randint(0,7)
         self.screen1.pixel(self.x, self.y, True, redraw=True)
         self.factory = rpi_gpio.KeypadFactory()
         self.keypad = self.factory.create_keypad(keypad=self.KEYPAD, row_pins=self.ROW_PINS, col_pins=self.COL_PINS)
