@@ -36,31 +36,26 @@ class MyKeyboard(Keyboard):
                 self.y = 8
             self.y = self.y - 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
-            print("Kierunek gora")
         elif key == "4":
             if self.x == 0 and key == "4":
                 self.screen1.pixel( 7, self.y, True, redraw=True)
                 self.x = 8
             self.x = self.x - 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
-            print("Kierunek lewo")
         elif key == "6":
             if self.x == 7 and key == "6":
                 self.screen1.pixel(0, self.y, True, redraw=True)
                 self.x = -1
             self.x = self.x + 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
-            print("Kierunek prawo")
         elif key == "8":
             if self.y == 7 and key == "8":
                 self.screen1.pixel(self.x, 0, True, redraw=True)
                 self.y = -1
             self.y = self.y + 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
-            print("Kierunek dol")
         else:
             self.screen1.pixel(self.x,self.y,True, redraw=True)
-            print("Nieznany kierunek")
 
 
 screen1 = led.matrix(cascaded=1)
