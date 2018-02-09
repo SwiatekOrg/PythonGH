@@ -31,20 +31,30 @@ class MyKeyboard(Keyboard):
     def processKey(self, key):
         self.screen1.clear()
         if key == "2":
-            if self.y == 1:
-
+            if self.y == 0:
+                self.screen1.pixel(self.x, self.y, True, redraw=True)
+                return None
             self.y = self.y - 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
             print("Kierunek gora")
         elif key == "4":
+            if self.x == 0:
+                self.screen1.pixel(self.x, self.y, True, redraw=True)
+                return None
             self.x = self.x - 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
             print("Kierunek lewo")
         elif key == "6":
+            if self.x == 7:
+                self.screen1.pixel(self.x, self.y, True, redraw=True)
+                return None
             self.x = self.x + 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
             print("Kierunek prawo")
         elif key == "8":
+            if self.y == 7:
+                self.screen1.pixel(self.x, self.y, True, redraw=True)
+                return None
             self.y = self.y + 1
             self.screen1.pixel(self.x,self.y,True, redraw=True)
             print("Kierunek dol")
