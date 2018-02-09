@@ -15,8 +15,8 @@ class Keyboard():
             ["*", "0", "#", "D"]
         ]
 
-        self.ROW_PINS = [p1, p2, p3, p4]  # BCM numbering (GPIO.. number), first 4 pins
-        self.COL_PINS = [p5, p6, p7, p8]  # next 4 left pins
+        self.ROW_PINS = [p1, p2, p3, p4]
+        self.COL_PINS = [p5, p6, p7, p8]
 
         self.x = randint(0,7)
         self.y = randint(0,7)
