@@ -33,26 +33,20 @@ class MyKeyboard(Keyboard):
         self.screen1.clear()
         if key == "2":
             if self.y == 0:
-                self.screen1.pixel(self.x, 7, True, redraw=True)
                 self.y = 8
             self.y = self.y - 1
         elif key == "4":
             if self.x == 0:
-                self.screen1.pixel( 7, self.y, True, redraw=True)
                 self.x = 8
             self.x = self.x - 1
         elif key == "6":
             if self.x == 7:
-                self.screen1.pixel(0, self.y, True, redraw=True)
                 self.x = -1
             self.x = self.x + 1
         elif key == "8":
             if self.y == 7:
-                self.screen1.pixel(self.x, 0, True, redraw=True)
                 self.y = -1
             self.y = self.y + 1
-        else:
-            pass
         self.screen1.pixel(self.x, self.y, True, redraw=True)
 
 screen1 = led.matrix(cascaded=1)
