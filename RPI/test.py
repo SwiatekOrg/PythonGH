@@ -46,7 +46,7 @@ class MyKeyboard(Keyboard):
             self.paint.append(b)
         c = 0
         for i in range(0,int((len(self.paint))/2)):
-            self.screen1.pixel(self.paint[c], self.paint[d+1\], True, redraw=True)
+            self.screen1.pixel(self.paint[c], self.paint[d+1], True, redraw=True)
             c+=2
 
 screen1 = led.matrix(cascaded=1)
