@@ -3,6 +3,7 @@ import sys
 import max7219.led as led
 from luma.core.interface.serial import spi, noop
 from random import randint
+import math
 
 
 class Keyboard():
@@ -17,9 +18,9 @@ class Keyboard():
 
         self.ROW_PINS = [p1, p2, p3, p4]
         self.COL_PINS = [p5, p6, p7, p8]
-
         self.x = randint(0,7)
         self.y = randint(0,7)
+        self.paint =[]
         self.screen1.pixel(self.x, self.y, True, redraw=True)
         self.factory = rpi_gpio.KeypadFactory()
         self.keypad = self.factory.create_keypad(keypad=self.KEYPAD, row_pins=self.ROW_PINS, col_pins=self.COL_PINS)
@@ -28,30 +29,32 @@ class Keyboard():
 class MyKeyboard(Keyboard):
 
     screen1 = led.matrix(cascaded=1)
-
     def processKey(self, key):
         self.screen1.clear()
         if key == "2":
-            if self.y == 0:
-                self.y = 8
-            self.y = self.y - 1
+            self.y = (self.y - 1) % 8
         elif key == "4":
-            if self.x == 0:
-                self.x = 8
-            self.x = self.x - 1
+            self.x = (self.x - 1) % 8
         elif key == "6":
-            if self.x == 7:
-                self.x = -1
-            self.x = self.x + 1
+            self.x = (self.x + 1) % 8
         elif key == "8":
-            if self.y == 7:
-                self.y = -1
-            self.y = self.y + 1
+            self.y = (self.y + 1) % 8
         self.screen1.pixel(self.x, self.y, True, redraw=True)
+        if key == "5":
+            a = self.x
+            self.paint.append(a)
+            b = self.y
+            self.paint.append(b)
+        i = 0
+        c = 0
+        d = 1
+        for i in range(0,int((len(self.paint))/2)):
+            self.screen1.pixel(self.paint[c], self.paint[d], True, redraw=True)
+            c+=2
+            d+=2
 
 screen1 = led.matrix(cascaded=1)
 keyboard2 = MyKeyboard(6, 5, 22, 27, 17, 4, 3, 2)
-
 
 while True:
     pass
