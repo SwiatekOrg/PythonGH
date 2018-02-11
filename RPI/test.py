@@ -29,7 +29,7 @@ class MyKeyboard(Keyboard):
 
     screen1 = led.matrix(cascaded=1)
     def processKey(self, key):
-        self.screen1.clear()
+        self.screen1.pixel(self.x, self.y, False, redraw=True)
         if key == "2":
             self.y = (self.y - 1) % 8
         elif key == "4":
@@ -42,7 +42,7 @@ class MyKeyboard(Keyboard):
         if key == "5":
             self.paint.append(self.x)
             self.paint.append(self.y)
-        for i in range(0,int((len(self.paint))/2)):
+        for i in range(0,(len(self.paint))//2):
             self.screen1.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
 
 screen1 = led.matrix(cascaded=1)
