@@ -6,7 +6,7 @@ from random import randint
 
 
 class Keyboard():
-
+    SIZE_LED = 8
     def __init__(self, p1, p2, p3, p4, p5, p6, p7, p8):
         self.KEYPAD = [
             ["1", "2", "3", "A"],
@@ -29,7 +29,7 @@ class Keyboard():
     def processKey(self, key):
         self.screen.pixel(self.x, self.y, False, redraw=True)
         if key == "2":
-            self.y = (self.y - 1) % 8
+            self.y = (self.y - 1) % SIZE_LED
         elif key == "4":
             self.x = (self.x - 1) % 8
         elif key == "6":
@@ -40,7 +40,7 @@ class Keyboard():
         if key == "5":
             self.paint.append(self.x)
             self.paint.append(self.y)
-        for i in range(0,(len(self.paint))//2):
+        for i in range(0,len(self.paint)//2):
             self.screen.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
 
 keyboard = Keyboard(6, 5, 22, 27, 17, 4, 3, 2)
