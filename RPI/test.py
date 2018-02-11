@@ -3,7 +3,6 @@ import sys
 import max7219.led as led
 from luma.core.interface.serial import spi, noop
 from random import randint
-import math
 
 
 class Keyboard():
@@ -45,13 +44,10 @@ class MyKeyboard(Keyboard):
             self.paint.append(a)
             b = self.y
             self.paint.append(b)
-        i = 0
         c = 0
-        d = 1
         for i in range(0,int((len(self.paint))/2)):
-            self.screen1.pixel(self.paint[c], self.paint[d], True, redraw=True)
+            self.screen1.pixel(self.paint[c], self.paint[d+1\], True, redraw=True)
             c+=2
-            d+=2
 
 screen1 = led.matrix(cascaded=1)
 keyboard2 = MyKeyboard(6, 5, 22, 27, 17, 4, 3, 2)
