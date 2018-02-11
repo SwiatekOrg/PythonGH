@@ -17,8 +17,8 @@ class Keyboard():
 
         self.ROW_PINS = [p1, p2, p3, p4]
         self.COL_PINS = [p5, p6, p7, p8]
-        self.x = randint(0,7)
-        self.y = randint(0,7)
+        self.x = randint(0,self.SIZE_LED-1)
+        self.y = randint(0,self.SIZE_LED-1)
         self.paint =[]
         self.screen = led.matrix(cascaded=1)
         self.screen.pixel(self.x, self.y, True, redraw=True)
@@ -29,13 +29,13 @@ class Keyboard():
     def processKey(self, key):
         self.screen.pixel(self.x, self.y, False, redraw=True)
         if key == "2":
-            self.y = (self.y - 1) % SIZE_LED
+            self.y = (self.y - 1) % self.SIZE_LED
         elif key == "4":
-            self.x = (self.x - 1) % 8
+            self.x = (self.x - 1) % self.SIZE_LED
         elif key == "6":
-            self.x = (self.x + 1) % 8
+            self.x = (self.x + 1) % self.SIZE_LED
         elif key == "8":
-            self.y = (self.y + 1) % 8
+            self.y = (self.y + 1) % self.SIZE_LED
         self.screen.pixel(self.x, self.y, True, redraw=True)
         if key == "5":
             self.paint.append(self.x)
