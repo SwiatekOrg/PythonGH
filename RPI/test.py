@@ -40,10 +40,8 @@ class MyKeyboard(Keyboard):
             self.y = (self.y + 1) % 8
         self.screen1.pixel(self.x, self.y, True, redraw=True)
         if key == "5":
-            a = self.x
-            self.paint.append(a)
-            b = self.y
-            self.paint.append(b)
+            self.paint.append(self.x)
+            self.paint.append(self.y)
         for i in range(0,int((len(self.paint))/2)):
             self.screen1.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
 
