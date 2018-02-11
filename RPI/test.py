@@ -20,16 +20,14 @@ class Keyboard():
         self.x = randint(0,7)
         self.y = randint(0,7)
         self.paint =[]
-        self.screen1.pixel(self.x, self.y, True, redraw=True)
+        self.screen = led.matrix(cascaded=1)
+        self.screen.pixel(self.x, self.y, True, redraw=True)
         self.factory = rpi_gpio.KeypadFactory()
         self.keypad = self.factory.create_keypad(keypad=self.KEYPAD, row_pins=self.ROW_PINS, col_pins=self.COL_PINS)
         self.keypad.registerKeyPressHandler(self.processKey)
 
-class MyKeyboard(Keyboard):
-
-    screen1 = led.matrix(cascaded=1)
     def processKey(self, key):
-        self.screen1.pixel(self.x, self.y, False, redraw=True)
+        self.screen.pixel(self.x, self.y, False, redraw=True)
         if key == "2":
             self.y = (self.y - 1) % 8
         elif key == "4":
@@ -38,15 +36,14 @@ class MyKeyboard(Keyboard):
             self.x = (self.x + 1) % 8
         elif key == "8":
             self.y = (self.y + 1) % 8
-        self.screen1.pixel(self.x, self.y, True, redraw=True)
+        self.screen.pixel(self.x, self.y, True, redraw=True)
         if key == "5":
             self.paint.append(self.x)
             self.paint.append(self.y)
         for i in range(0,(len(self.paint))//2):
-            self.screen1.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
+            self.screen.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
 
-screen1 = led.matrix(cascaded=1)
-keyboard2 = MyKeyboard(6, 5, 22, 27, 17, 4, 3, 2)
+keyboard = Keyboard(6, 5, 22, 27, 17, 4, 3, 2)
 
 while True:
     pass
