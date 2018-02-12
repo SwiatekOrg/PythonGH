@@ -19,7 +19,7 @@ class Keyboard():
         self.COL_PINS = [p5, p6, p7, p8]
         self.x = randint(0,self.SIZE_LED-1)
         self.y = randint(0,self.SIZE_LED-1)
-        self.paint =[]
+        self.tablica =[]
         self.screen = led.matrix(cascaded=1)
         self.screen.pixel(self.x, self.y, True, redraw=True)
         self.factory = rpi_gpio.KeypadFactory()
@@ -37,11 +37,21 @@ class Keyboard():
         elif key == "8":
             self.y = (self.y + 1) % self.SIZE_LED
         self.screen.pixel(self.x, self.y, True, redraw=True)
-        if key == "5":
-            self.paint.append(self.x)
-            self.paint.append(self.y)
-        for i in range(0,len(self.paint)//2):
-            self.screen.pixel(self.paint[2*i], self.paint[2*i+1], True, redraw=True)
+
+        if str(str(self.x)+str(self.y)) in self.tablica and key == "5":
+            self.screen.pixel(self.x, self.y, False, redraw=True)
+            self.tablica.remove(str(str(self.x)+str(self.y)))
+            self.screen.pixel(self.x, self.y, False, redraw=True)
+        elif key == "5":
+            self.tablica.append(str(str(self.x)+str(self.y)))
+        for i in range(0,len(self.tablica)):
+            a = int(self.tablica[i])//10
+            b = int(self.tablica[i])%10
+            self.screen.pixel( a, b, True, redraw=True)
+        self.screen.pixel(self.x, self.y, True, redraw=True)
+
+
+
 
 keyboard = Keyboard(6, 5, 22, 27, 17, 4, 3, 2)
 
