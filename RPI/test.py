@@ -4,6 +4,9 @@ from luma.core.interface.serial import spi, noop
 from random import randint
 import time
 
+screen = led.matrix(cascaded = 1)
+screen.show_message("LED Paint")
+time.sleep(1)
 
 class Keyboard():
     SIZE_LED = 8
