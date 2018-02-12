@@ -1,8 +1,8 @@
 from pad4pi import rpi_gpio
-import sys
 import max7219.led as led
 from luma.core.interface.serial import spi, noop
 from random import randint
+import time
 
 
 class Keyboard():
@@ -25,6 +25,11 @@ class Keyboard():
         self.factory = rpi_gpio.KeypadFactory()
         self.keypad = self.factory.create_keypad(keypad=self.KEYPAD, row_pins=self.ROW_PINS, col_pins=self.COL_PINS)
         self.keypad.registerKeyPressHandler(self.processKey)
+        while True:
+            self.screen.pixel(self.x, self.y, True, redraw=True)
+            time.sleep(0.5)
+            self.screen.pixel(self.x, self.y, False, redraw=True)
+            time.sleep(0.5)
 
     def processKey(self, key):
         self.screen.pixel(self.x, self.y, False, redraw=True)
@@ -38,6 +43,7 @@ class Keyboard():
             self.y = (self.y + 1) % self.SIZE_LED
         self.screen.pixel(self.x, self.y, True, redraw=True)
 
+
         if str(str(self.x)+str(self.y)) in self.tablica and key == "5":
             self.screen.pixel(self.x, self.y, False, redraw=True)
             self.tablica.remove(str(str(self.x)+str(self.y)))
@@ -50,10 +56,9 @@ class Keyboard():
             self.screen.pixel( a, b, True, redraw=True)
         self.screen.pixel(self.x, self.y, True, redraw=True)
 
-
-
-
 keyboard = Keyboard(6, 5, 22, 27, 17, 4, 3, 2)
+screen = led.matrix(cascaded = 1)
 
+screen.show_message("LED Paint")
 while True:
     pass
