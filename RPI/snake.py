@@ -18,6 +18,15 @@ def DoPrzodu():
     screen.pixel(x%SIZE_LED, y%SIZE_LED, False, redraw=True)
     x += 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+def SkretLewo():
+    global x,y
+    time.sleep(0.4)
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, False, redraw=True)
+    y += 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
 
 while True:
     DoPrzodu()
+    if x == 4:
+        while True:
+            SkretLewo()
