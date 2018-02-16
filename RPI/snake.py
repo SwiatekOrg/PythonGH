@@ -9,7 +9,7 @@ screen = led.matrix(cascaded = 1)
 SIZE_LED = 8
 x = 0
 y = 4
-
+licznik = 0
 screen.pixel(x, y, True, redraw=True)
 
 def DoPrzodu():
@@ -27,6 +27,12 @@ def SkretLewo():
 
 while True:
     DoPrzodu()
-    if x == 4:
+    licznik +=1
+    if licznik == 4:
+        licznik = 0
         while True:
+            licznik +=1
             SkretLewo()
+            if licznik == 4:
+                licznik = 0
+                break
