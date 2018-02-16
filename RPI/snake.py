@@ -20,7 +20,12 @@ screen.pixel(x, y, True, redraw=True)
 
 while True:
     time.sleep(0.2)
-    screen.pixel((x+6)%8,y, False, redraw=True)
+    screen.pixel((x+6)%SIZE_LED,y, False, redraw=True)
     x += 1
-    screen.pixel(x%8, y, True, redraw=True)
-
+    screen.pixel(x%SIZE_LED, y, True, redraw=True)
+    if x == 5:
+        while True:
+            time.sleep(0.2)
+            screen.pixel(x, (y+6)%SIZE_LED, False, redraw=True)
+            y += 1
+            screen.pixel(x, y%SIZE_LED, True, redraw=True)
