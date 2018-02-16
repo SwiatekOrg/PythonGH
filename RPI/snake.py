@@ -9,7 +9,7 @@ screen = led.matrix(cascaded = 1)
 SIZE_LED = 8
 x = 0
 y = 4
-licznik = 0
+
 screen.pixel(x, y, True, redraw=True)
 
 def DoPrzodu():
