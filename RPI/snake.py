@@ -6,17 +6,15 @@ import time
 
 
 screen = led.matrix(cascaded = 1)
-
 SIZE_LED = 8
 STARTX = 0
 STARTY = 4
-
 x = STARTX
 y = STARTY
-
 screen.pixel(x, y, True, redraw=True)
 
 
+##### 1 WERSJA! ####
 def DoPrzodu():
     global x,y
     time.sleep(0.4)
