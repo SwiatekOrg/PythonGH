@@ -6,11 +6,16 @@ import time
 
 
 screen = led.matrix(cascaded = 1)
+
 SIZE_LED = 8
-x = 0
-y = 4
-licznik = 0
+STARTX = 0
+STARTY = 4
+
+x = STARTX
+y = STARTY
+
 screen.pixel(x, y, True, redraw=True)
+
 
 def DoPrzodu():
     global x,y
@@ -18,21 +23,72 @@ def DoPrzodu():
     screen.pixel(x%SIZE_LED, y%SIZE_LED, False, redraw=True)
     x += 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
-def SkretLewo():
+def DoTylu():
+    global x, y
+    time.sleep(0.4)
+    screen.pixel(x % SIZE_LED, y % SIZE_LED, False, redraw=True)
+    x -= 1
+    screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
+def WGore():
+    global x,y
+    time.sleep(0.4)
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, False, redraw=True)
+    y -= 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+def WDol():
     global x,y
     time.sleep(0.4)
     screen.pixel(x%SIZE_LED, y%SIZE_LED, False, redraw=True)
     y += 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
 
+def Wkolko():
+    while True:
+        DoPrzodu()
+        if x == STARTX + 4:
+            while True:
+                WGore()
+                if y == STARTY - 4:
+                    while True:
+                        DoTylu()
+                        if x == STARTX:
+                            while True:
+                                WDol()
+                                if y == STARTY:
+                                    return None
+
+
 while True:
-    DoPrzodu()
-    licznik +=1
-    if licznik == 4:
-        licznik = 0
-        while True:
-            licznik +=1
-            SkretLewo()
-            if licznik == 4:
-                licznik = 0
-                break
+    Wkolko()
+
+#### 2 WERSJA! ####
+
+def Idz(os, kierunek):
+    global x, y
+    time.sleep(0.4)
+    screen.pixel(x % SIZE_LED, y % SIZE_LED, False, redraw=True)
+    os += kierunek
+    screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
+
+
+def Wkolko():
+    while True:
+        Idz(x,1)
+        if x == STARTX + 4:
+            while True:
+                Idz(y,-1)
+                if y == STARTY - 4:
+                    while True:
+                        Idz(x,-1)
+                        if x == STARTX:
+                            while True:
+                                Idz(y,1)
+                                if y == STARTY:
+                                    return None
+
+
+
+while True:
+    Wkolko()
+
+
