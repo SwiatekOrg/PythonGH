@@ -60,31 +60,39 @@ def Losowo():
     while True:
         z = randint(1,4)
         if z == 1:
+            a = randint(1, 10)
             while True:
                 licznik += 1
                 DoPrzodu()
-                if licznik == 4:
+                print(licznik)
+                if licznik == a:
                     licznik = 0
                     break
         elif z == 2:
+            a = randint(1, 10)
             while True:
                 licznik += 1
                 DoTylu()
-                if licznik == 4:
+                print(licznik)
+                if licznik == a:
                     licznik = 1
                     break
         elif z == 3:
+            a = randint(1, 10)
             while True:
                 licznik += 1
                 WGore()
-                if licznik == 4:
+                print(licznik)
+                if licznik == a:
                     licznik = 0
                     break
         elif z == 4:
+            a = randint(1, 10)
             while True:
                 licznik += 1
                 WDol()
-                if licznik == 4:
+                print(licznik)
+                if licznik == a:
                     licznik = 0
                     break
 
@@ -95,6 +103,7 @@ licznik=1
 while True:
     DoPrzodu()
     licznik += 1
-    if licznik == 4:
+    print(licznik)
+    if licznik == randint(1,10):
         Losowo()
 
