@@ -8,7 +8,7 @@ import time
 screen = led.matrix(cascaded = 1)
 SIZE_LED = 8
 STARTX = 0
-STARTY = 4
+STARTY = 0
 x = STARTX
 y = STARTY
 screen.pixel(x, y, True, redraw=True)
@@ -55,38 +55,46 @@ def Wkolko():
                                 if y == STARTY:
                                     return None
 
-
-while True:
-    Wkolko()
-
-#### 2 WERSJA! ####
-
-def Idz(os, kierunek):
-    global x, y
-    time.sleep(0.4)
-    screen.pixel(x % SIZE_LED, y % SIZE_LED, False, redraw=True)
-    os += kierunek
-    screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
-
-
-def Wkolko():
+def Losowo():
+    licznik = 0
     while True:
-        Idz(x,1)
-        if x == STARTX + 4:
+        z = randint(1,4)
+        if z == 1:
             while True:
-                Idz(y,-1)
-                if y == STARTY - 4:
-                    while True:
-                        Idz(x,-1)
-                        if x == STARTX:
-                            while True:
-                                Idz(y,1)
-                                if y == STARTY:
-                                    return None
+                licznik += 1
+                DoPrzodu()
+                if licznik == 4:
+                    licznik = 0
+                    break
+        elif z == 2:
+            while True:
+                licznik += 1
+                DoTylu()
+                if licznik == 4:
+                    licznik = 1
+                    break
+        elif z == 3:
+            while True:
+                licznik += 1
+                WGore()
+                if licznik == 4:
+                    licznik = 0
+                    break
+        elif z == 4:
+            while True:
+                licznik += 1
+                WDol()
+                if licznik == 4:
+                    licznik = 0
+                    break
 
 
+
+licznik=1
 
 while True:
-    Wkolko()
-
+    DoPrzodu()
+    licznik += 1
+    if licznik == 4:
+        Losowo()
 
