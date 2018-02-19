@@ -23,10 +23,38 @@ def SkretWGore():
     screen.pixel((x-2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
     y -= 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
     time.sleep(0.4)
     screen.pixel((x-1)%SIZE_LED, (y+1)%SIZE_LED, False, redraw=True)
     y -= 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
+def SkretWDol():
+    global x,y
+    time.sleep(0.4)
+    screen.pixel((x-2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
+    y += 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
+    time.sleep(0.4)
+    screen.pixel((x-1)%SIZE_LED, (y-1)%SIZE_LED, False, redraw=True)
+    y += 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
+def SkretWGoreTyl():
+    global x,y
+    time.sleep(0.4)
+    screen.pixel((x+2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
+    y -= 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
+    time.sleep(0.4)
+    screen.pixel((x+1)%SIZE_LED, (y+1)%SIZE_LED, False, redraw=True)
+    y -= 1
+    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+
+
+
 
 
 def DoPrzodu():
@@ -56,8 +84,7 @@ def WDol():
 
 while True:
     DoPrzodu()
-    if x == 5:
+    if x%SIZE_LED == 5:
         SkretWGore()
-        WGore()
         while True:
             WGore()
