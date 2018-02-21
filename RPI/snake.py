@@ -6,85 +6,80 @@ import time
 
 screen = led.matrix(cascaded = 1)
 SIZE_LED = 8
+SNAKE_SIZE = 3
 STARTX = 0
 STARTY = 5
 x = STARTX
 y = STARTY
+pozycje = []
 
-screen.pixel(x, y, True, redraw=True)
-x += 1
-screen.pixel(x, y, True, redraw=True)
-x += 1
-screen.pixel(x, y, True, redraw=True)
-
-def SkretWGore():
+def Poczatek():
     global x,y
-    time.sleep(0.4)
-    screen.pixel((x-2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
-    y -= 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+    i = 0
+    for i in range(0,SNAKE_SIZE):
+        Dodaj()
+        screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+        if i<SNAKE_SIZE-1:
+          x += 1
 
-    time.sleep(0.4)
-    screen.pixel((x-1)%SIZE_LED, (y+1)%SIZE_LED, False, redraw=True)
-    y -= 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
-
-def SkretWDol():
-    global x,y
-    time.sleep(0.4)
-    screen.pixel((x-2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
-    y += 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
-
-    time.sleep(0.4)
-    screen.pixel((x-1)%SIZE_LED, (y-1)%SIZE_LED, False, redraw=True)
-    y += 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
-
-def SkretWGoreTyl():
-    global x,y
-    time.sleep(0.4)
-    screen.pixel((x+2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
-    y -= 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
-
-    time.sleep(0.4)
-    screen.pixel((x+1)%SIZE_LED, (y+1)%SIZE_LED, False, redraw=True)
-    y -= 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+def Dodaj():
+    pozycje.append((str(x%SIZE_LED)+str(y%SIZE_LED)))
 
 
-
-
+def Usun():
+    a = int(pozycje[0]) // 10
+    b = int(pozycje[0]) % 10
+    screen.pixel(a, b, False, redraw=True)
+    pozycje.remove(pozycje[0])
 
 def DoPrzodu():
     global x,y
     time.sleep(0.4)
-    screen.pixel((x-2)%SIZE_LED, y%SIZE_LED, False, redraw=True)
+    Usun()
     x += 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+    Dodaj()
 def DoTylu():
     global x, y
     time.sleep(0.4)
-    screen.pixel((x+2) % SIZE_LED, y % SIZE_LED, False, redraw=True)
+    Usun()
     x -= 1
     screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
+    Dodaj()
 def WGore():
     global x,y
     time.sleep(0.4)
-    screen.pixel(x%SIZE_LED, (y+2)%SIZE_LED, False, redraw=True)
+    Usun()
     y -= 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+    Dodaj()
 def WDol():
     global x,y
     time.sleep(0.4)
-    screen.pixel(x%SIZE_LED, (y-2)%SIZE_LED, False, redraw=True)
+    Usun()
     y += 1
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
+    Dodaj()
+
+
+Poczatek()
 
 while True:
+    print(pozycje)
     DoPrzodu()
-    if x%SIZE_LED == 5:
-        SkretWGore()
-        while True:
-            WGore()
+    print(pozycje)
+    DoPrzodu()
+    print(pozycje)
+    DoPrzodu()
+    print(pozycje)
+    DoPrzodu()
+    print(pozycje)
+    WGore()
+    print(pozycje)
+    WGore()
+    print(pozycje)
+    DoTylu()
+    print(pozycje)
+    WDol()
+    print(pozycje)
+
