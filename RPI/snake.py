@@ -2,6 +2,7 @@ from pad4pi import rpi_gpio
 import max7219.led as led
 from luma.core.interface.serial import spi, noop
 from random import randint
+import random
 import time
 
 screen = led.matrix(cascaded = 1)
@@ -62,22 +63,27 @@ def WDol():
     Dodaj()
 
 
-
+screen.clear()
 Poczatek()
+kierunek = randint(0,4)
 while True:
-    DoPrzodu()
-    DoPrzodu()
-    DoPrzodu()
 
-    WGore()
-    WGore()
-    WGore()
-
-    DoTylu()
-    DoTylu()
-    DoTylu()
-
-    WDol()
-    WDol()
-    WDol()
-
+    ile = randint(0,8)
+    if kierunek == 0:
+        kierunek = random.choice( [0,2,3] )
+        for b in range(0,ile):
+            DoPrzodu()
+    elif kierunek == 1:
+        kierunek = random.choice( [1,2,3] )
+        for b in range(0,ile):
+            DoTylu()
+    elif kierunek == 2:
+        kierunek = random.choice( [0,1,2] )
+        for b in range(0, ile):
+            WGore()
+    elif kierunek == 3:
+        kierunek = random.choice( [0,1,3] )
+        for b in range(0, ile):
+            WDol()
+    else:
+        print("lol")
