@@ -13,6 +13,7 @@ x = STARTX
 y = STARTY
 pozycje = []
 
+
 def Poczatek():
     global x,y
     i = 0
@@ -24,7 +25,6 @@ def Poczatek():
 
 def Dodaj():
     pozycje.append((str(x%SIZE_LED)+str(y%SIZE_LED)))
-
 
 def Usun():
     a = int(pozycje[0]) // 10
@@ -62,24 +62,7 @@ def WDol():
     Dodaj()
 
 
+
 Poczatek()
-
 while True:
-    print(pozycje)
     DoPrzodu()
-    print(pozycje)
-    DoPrzodu()
-    print(pozycje)
-    DoPrzodu()
-    print(pozycje)
-    DoPrzodu()
-    print(pozycje)
-    WGore()
-    print(pozycje)
-    WGore()
-    print(pozycje)
-    DoTylu()
-    print(pozycje)
-    WDol()
-    print(pozycje)
-
