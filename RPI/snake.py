@@ -66,3 +66,18 @@ def WDol():
 Poczatek()
 while True:
     DoPrzodu()
+    DoPrzodu()
+    DoPrzodu()
+
+    WGore()
+    WGore()
+    WGore()
+
+    DoTylu()
+    DoTylu()
+    DoTylu()
+
+    WDol()
+    WDol()
+    WDol()
+
