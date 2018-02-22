@@ -6,17 +6,22 @@ import random
 import time
 
 screen = led.matrix(cascaded = 1)
+
 SIZE_LED = 8
 SNAKE_SIZE = 3
 STARTX = 0
 STARTY = 5
+
 x = STARTX
 y = STARTY
 pozycje = []
+kierunek = randint(0,4)
 
 
 def Poczatek():
+
     global x,y
+    screen.clear()
     i = 0
     for i in range(0,SNAKE_SIZE):
         Dodaj()
@@ -63,12 +68,10 @@ def WDol():
     Dodaj()
 
 
-screen.clear()
 Poczatek()
-kierunek = randint(0,4)
 while True:
 
-    ile = randint(0,8)
+    ile = 1
     if kierunek == 0:
         kierunek = random.choice( [0,2,3] )
         for b in range(0,ile):
