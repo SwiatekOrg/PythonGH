@@ -67,26 +67,45 @@ def WDol():
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
     Dodaj()
 
-
+poprzedni = 4
 Poczatek()
+DoPrzodu()
 while True:
+    kierunek = randint(0,3)
 
-    ile = 1
-    if kierunek == 0:
-        kierunek = random.choice( [0,2,3] )
-        for b in range(0,ile):
-            DoPrzodu()
-    elif kierunek == 1:
-        kierunek = random.choice( [1,2,3] )
-        for b in range(0,ile):
+    if kierunek == 0:  #DoPrzodu
+        if poprzedni == 1:
             DoTylu()
-    elif kierunek == 2:
-        kierunek = random.choice( [0,1,2] )
-        for b in range(0, ile):
-            WGore()
-    elif kierunek == 3:
-        kierunek = random.choice( [0,1,3] )
-        for b in range(0, ile):
+            poprzedni = 1
+            print("KUR")
+        else:
+            DoPrzodu()
+            poprzedni = 0
+    elif kierunek == 1: #DoTylu
+        if poprzedni == 0:
+            DoPrzodu()
+            poprzedni = 0
+            print("KUR")
+        else:
+            DoTylu()
+            poprzedni = 1
+    elif kierunek == 2:  #WGore
+        if poprzedni == 3:
             WDol()
-    else:
-        print("lol")
+            poprzedni = 3
+            print("KUR")
+        else:
+            WGore()
+            poprzedni = 2
+    elif kierunek == 3:   #WDol
+        if poprzedni == 2:
+            WGore()
+            poprzedni = 2
+            print("KUR")
+        else:
+            WDol()
+            poprzedni = 3
+    print("p" + str(poprzedni))
+    print("k"+str(kierunek))
+    print(str(x)+str(y))
+    print(pozycje)
