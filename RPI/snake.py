@@ -67,7 +67,7 @@ def WDol():
     screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
     Dodaj()
 
-poprzedni = 4
+poprzedni = 0
 Poczatek()
 DoPrzodu()
 while True:
