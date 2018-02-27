@@ -13,11 +13,12 @@ SNAKE_SIZE = 3
 STARTX = 0
 STARTY = 5
 PRZERWA = 0.4
+
+dlugosc = SNAKE_SIZE
 x = STARTX
 y = STARTY
 pozycje = []
 kierunek = randint(0,4)
-
 
 def Poczatek():
     global x,y
@@ -36,25 +37,25 @@ def Usun():
     pozycje.remove(pozycje[0])
 
 def DoPrzodu():
-    global x,y
+    global x
     Usun()
     x += 1
     Dodaj()
 
 def DoTylu():
-    global x, y
+    global x
     Usun()
     x -= 1
     Dodaj()
 
 def WGore():
-    global x,y
+    global y
     Usun()
     y -= 1
     Dodaj()
 
 def WDol():
-    global x,y
+    global y
     Usun()
     y += 1
     Dodaj()
