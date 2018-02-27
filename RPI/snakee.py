@@ -5,9 +5,10 @@ from random import randint
 import random
 import time
 
+
 class Snake():
 
-    def __init__(self):
+    def __init__(self, p1, p2, p3, p4, p5, p6, p7, p8):
         self.screen = led.matrix(cascaded = 1)
         self.screen.clear()
 
@@ -21,6 +22,20 @@ class Snake():
         self.y = self.STARTY
         self.pozycje = []
         self.poprzedni = 0
+
+        self.KEYPAD = [
+            ["1", "2", "3", "A"],
+            ["4", "5", "6", "B"],
+            ["7", "8", "9", "C"],
+            ["*", "0", "#", "D"]
+        ]
+
+        self.ROW_PINS = [p1, p2, p3, p4]
+        self.COL_PINS = [p5, p6, p7, p8]
+
+        self.factory = rpi_gpio.KeypadFactory()
+        self.keypad = self.factory.create_keypad(keypad=self.KEYPAD, row_pins=self.ROW_PINS, col_pins=self.COL_PINS)
+        self.keypad.registerKeyPressHandler(self.processKey)
 
     def Poczatek(self):
         for i in range(0,self.SNAKE_SIZE):
@@ -88,5 +103,37 @@ class Snake():
             self.LosowoCoKrok()
             self.Dodaj()
 
-snake = Snake()
-snake.SnakeLive()
+class Keyboard(Snake):
+
+    def processKey(self, key):
+        if key == "6":
+            while True:
+                time.sleep(self.PRZERWA)
+                self.Usun()
+                self.DoPrzodu()
+                self.Dodaj()
+        elif key == "4":
+            while True:
+                time.sleep(self.PRZERWA)
+                self.Usun()
+                self.DoTylu()
+                self.Dodaj()
+        elif key == "2":
+            while True:
+                time.sleep(self.PRZERWA)
+                self.Usun()
+                self.WGore()
+                self.Dodaj()
+        elif key == "8":
+            while True:
+                time.sleep(self.PRZERWA)
+                self.Usun()
+                self.WDol()
+                self.Dodaj()
+
+
+
+keyboard = Keyboard(2, 3, 4, 17, 27, 22, 5, 6)
+keyboard.Poczatek()
+while True:
+    pass
