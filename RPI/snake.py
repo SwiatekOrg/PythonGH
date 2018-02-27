@@ -18,7 +18,7 @@ dlugosc = SNAKE_SIZE
 x = STARTX
 y = STARTY
 pozycje = []
-kierunek = randint(0,4)
+
 
 def Poczatek():
     global x
@@ -93,5 +93,5 @@ while True:
             WDol()
             poprzedni = 3
 
-            
+
     Dodaj()
