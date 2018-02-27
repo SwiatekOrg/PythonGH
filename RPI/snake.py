@@ -6,12 +6,13 @@ import random
 import time
 
 screen = led.matrix(cascaded = 1)
+screen.clear()
 
 SIZE_LED = 8
 SNAKE_SIZE = 3
 STARTX = 0
 STARTY = 5
-
+PRZERWA = 0.4
 x = STARTX
 y = STARTY
 pozycje = []
@@ -20,7 +21,6 @@ kierunek = randint(0,4)
 
 def Poczatek():
     global x,y
-    screen.clear()
     for i in range(0,SNAKE_SIZE):
         Dodaj()
         screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
@@ -37,25 +37,24 @@ def Usun():
 
 def DoPrzodu():
     global x,y
-    time.sleep(0.4)
     Usun()
     x += 1
     Dodaj()
+
 def DoTylu():
     global x, y
-    time.sleep(0.4)
     Usun()
     x -= 1
     Dodaj()
+
 def WGore():
     global x,y
-    time.sleep(0.4)
     Usun()
     y -= 1
     Dodaj()
+
 def WDol():
     global x,y
-    time.sleep(0.4)
     Usun()
     y += 1
     Dodaj()
@@ -64,6 +63,7 @@ poprzedni = 0
 Poczatek()
 DoPrzodu()
 while True:
+    time.sleep(PRZERWA)
     kierunek = randint(0,3)
 
     if kierunek == 0:  #DoPrzodu
