@@ -38,22 +38,18 @@ def Usun():
 
 def DoPrzodu():
     global x
-    Usun()
     x += 1
 
 def DoTylu():
     global x
-    Usun()
     x -= 1
 
 def WGore():
     global y
-    Usun()
     y -= 1
 
 def WDol():
     global y
-    Usun()
     y += 1
 
 poprzedni = 0
@@ -61,6 +57,7 @@ Poczatek()
 
 while True:
     time.sleep(PRZERWA)
+    Usun()
     kierunek = randint(0,3)
 
     if kierunek == 0:  #DoPrzodu
@@ -95,4 +92,6 @@ while True:
         else:
             WDol()
             poprzedni = 3
+
+            
     Dodaj()
