@@ -21,7 +21,7 @@ pozycje = []
 kierunek = randint(0,4)
 
 def Poczatek():
-    global x,y
+    global x
     for i in range(0,SNAKE_SIZE):
         Dodaj()
         screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
@@ -40,29 +40,25 @@ def DoPrzodu():
     global x
     Usun()
     x += 1
-    Dodaj()
 
 def DoTylu():
     global x
     Usun()
     x -= 1
-    Dodaj()
 
 def WGore():
     global y
     Usun()
     y -= 1
-    Dodaj()
 
 def WDol():
     global y
     Usun()
     y += 1
-    Dodaj()
 
 poprzedni = 0
 Poczatek()
-DoPrzodu()
+
 while True:
     time.sleep(PRZERWA)
     kierunek = randint(0,3)
@@ -99,3 +95,4 @@ while True:
         else:
             WDol()
             poprzedni = 3
+    Dodaj()
