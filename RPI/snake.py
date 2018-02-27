@@ -5,31 +5,22 @@ from random import randint
 import random
 import time
 
-screen = led.matrix(cascaded = 1)
+def __init__():
+    screen = led.matrix(cascaded = 1)
+    screen.clear()
+
+    SIZE_LED = 8
+    SNAKE_SIZE = 3
+    STARTX = 0
+    STARTY = 5
+    PRZERWA = 0.4
 
 
-screen.clear()
-
-SIZE_LED = 8
-
-SNAKE_SIZE = 3
-
-STARTX = 0
-
-STARTY = 5
-
-PRZERWA = 0.4
-
-
-dlugosc = SNAKE_SIZE
-
-x = STARTX
-
-y = STARTY
-
-pozycje = []
-
-poprzedni = 0
+    dlugosc = SNAKE_SIZE
+    x = STARTX
+    y = STARTY
+    pozycje = []
+    poprzedni = 0
 
 def Poczatek():
     global x
