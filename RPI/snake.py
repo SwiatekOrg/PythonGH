@@ -84,9 +84,12 @@ def LosowoCoKrok():
             WDol()
             poprzedni = 3
 
-Poczatek()
-while True:
-    time.sleep(PRZERWA)
-    Usun()
-    LosowoCoKrok()
-    Dodaj()
+def SnakeLive():
+    Poczatek()
+    while True:
+        time.sleep(PRZERWA)
+        Usun()
+        LosowoCoKrok()
+        Dodaj()
+
+SnakeLive()
