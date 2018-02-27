@@ -112,24 +112,37 @@ class Keyboard(Snake):
                 self.Usun()
                 self.DoPrzodu()
                 self.Dodaj()
+                print("FUK")
+                pass
+                break
+
         elif key == "4":
             while True:
                 time.sleep(self.PRZERWA)
                 self.Usun()
                 self.DoTylu()
                 self.Dodaj()
+                print("XD")
+                pass
+                break
         elif key == "2":
             while True:
                 time.sleep(self.PRZERWA)
                 self.Usun()
                 self.WGore()
                 self.Dodaj()
+                print("LUJ")
+                pass
+                break
         elif key == "8":
             while True:
                 time.sleep(self.PRZERWA)
                 self.Usun()
                 self.WDol()
                 self.Dodaj()
+                print("LOL")
+                pass
+                break
 
 
 
