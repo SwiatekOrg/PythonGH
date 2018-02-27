@@ -7,6 +7,7 @@ import time
 
 screen = led.matrix(cascaded = 1)
 
+
 screen.clear()
 
 SIZE_LED = 8
@@ -18,6 +19,7 @@ STARTX = 0
 STARTY = 5
 
 PRZERWA = 0.4
+
 
 dlugosc = SNAKE_SIZE
 
