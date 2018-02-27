@@ -18,7 +18,7 @@ dlugosc = SNAKE_SIZE
 x = STARTX
 y = STARTY
 pozycje = []
-
+poprzedni = 0
 
 def Poczatek():
     global x
@@ -52,19 +52,13 @@ def WDol():
     global y
     y += 1
 
-poprzedni = 0
-Poczatek()
-
-while True:
-    time.sleep(PRZERWA)
-    Usun()
+def LosowoCoKrok():
+    global poprzedni
     kierunek = randint(0,3)
-
     if kierunek == 0:  #DoPrzodu
         if poprzedni == 1:
             DoTylu()
             poprzedni = 1
-            print("KUR")
         else:
             DoPrzodu()
             poprzedni = 0
@@ -72,7 +66,6 @@ while True:
         if poprzedni == 0:
             DoPrzodu()
             poprzedni = 0
-            print("KUR")
         else:
             DoTylu()
             poprzedni = 1
@@ -80,7 +73,6 @@ while True:
         if poprzedni == 3:
             WDol()
             poprzedni = 3
-            print("KUR")
         else:
             WGore()
             poprzedni = 2
@@ -88,10 +80,13 @@ while True:
         if poprzedni == 2:
             WGore()
             poprzedni = 2
-            print("KUR")
         else:
             WDol()
             poprzedni = 3
 
-
+Poczatek()
+while True:
+    time.sleep(PRZERWA)
+    Usun()
+    LosowoCoKrok()
     Dodaj()
