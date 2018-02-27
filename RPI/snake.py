@@ -19,10 +19,8 @@ kierunek = randint(0,4)
 
 
 def Poczatek():
-
     global x,y
     screen.clear()
-    i = 0
     for i in range(0,SNAKE_SIZE):
         Dodaj()
         screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
@@ -30,12 +28,11 @@ def Poczatek():
           x += 1
 
 def Dodaj():
+    screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
     pozycje.append((str(x%SIZE_LED)+str(y%SIZE_LED)))
 
 def Usun():
-    a = int(pozycje[0]) // 10
-    b = int(pozycje[0]) % 10
-    screen.pixel(a, b, False, redraw=True)
+    screen.pixel((int(pozycje[0]) // 10),(int(pozycje[0]) % 10), False, redraw=True)
     pozycje.remove(pozycje[0])
 
 def DoPrzodu():
@@ -43,28 +40,24 @@ def DoPrzodu():
     time.sleep(0.4)
     Usun()
     x += 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
     Dodaj()
 def DoTylu():
     global x, y
     time.sleep(0.4)
     Usun()
     x -= 1
-    screen.pixel(x % SIZE_LED, y % SIZE_LED, True, redraw=True)
     Dodaj()
 def WGore():
     global x,y
     time.sleep(0.4)
     Usun()
     y -= 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
     Dodaj()
 def WDol():
     global x,y
     time.sleep(0.4)
     Usun()
     y += 1
-    screen.pixel(x%SIZE_LED, y%SIZE_LED, True, redraw=True)
     Dodaj()
 
 poprzedni = 0
@@ -105,7 +98,3 @@ while True:
         else:
             WDol()
             poprzedni = 3
-    print("p" + str(poprzedni))
-    print("k"+str(kierunek))
-    print(str(x)+str(y))
-    print(pozycje)
