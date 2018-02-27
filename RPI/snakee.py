@@ -103,8 +103,6 @@ class Snake():
             self.LosowoCoKrok()
             self.Dodaj()
 
-class Keyboard(Snake):
-
     def processKey(self, key):
         if key == "6":
             while True:
@@ -112,9 +110,6 @@ class Keyboard(Snake):
                 self.Usun()
                 self.DoPrzodu()
                 self.Dodaj()
-                print("FUK")
-                pass
-                break
 
         elif key == "4":
             while True:
@@ -122,31 +117,23 @@ class Keyboard(Snake):
                 self.Usun()
                 self.DoTylu()
                 self.Dodaj()
-                print("XD")
-                pass
-                break
+
         elif key == "2":
             while True:
                 time.sleep(self.PRZERWA)
                 self.Usun()
                 self.WGore()
                 self.Dodaj()
-                print("LUJ")
-                pass
-                break
         elif key == "8":
             while True:
                 time.sleep(self.PRZERWA)
                 self.Usun()
                 self.WDol()
                 self.Dodaj()
-                print("LOL")
-                pass
-                break
 
 
 
-keyboard = Keyboard(2, 3, 4, 17, 27, 22, 5, 6)
+keyboard = Snake(6, 5, 22, 27, 17, 4, 3, 2)
 keyboard.Poczatek()
 while True:
     pass
