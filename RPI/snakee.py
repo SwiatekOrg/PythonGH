@@ -17,11 +17,14 @@ class Snake():
         self.STARTX = 0
         self.STARTY = 5
         self.PRZERWA = 0.4
+
         self.kierunek = "prawo"
         self.x = self.STARTX
         self.y = self.STARTY
         self.pozycje = []
+        self.punkt = str(randint(0,self.SIZE_LED-1))+str(randint(0,self.SIZE_LED-1))
         self.poprzedni = 0
+        self.miganie = 0
 
         self.KEYPAD = [
             ["1", "2", "3", "A"],
@@ -64,6 +67,38 @@ class Snake():
     def WDol(self):
         self.y += 1
 
+    def Punkt(self):
+        self.punkt = (str(randint(0, self.SIZE_LED - 1)) + str(randint(0, self.SIZE_LED - 1)))
+
+        while self.punkt in self.pozycje:
+            self.punkt = str(randint(0, self.SIZE_LED - 1)) + str(randint(0, self.SIZE_LED - 1))
+            if self.pozycje not in self.pozycje:
+                break
+
+        self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=True)
+
+    def Miganie(self):
+        if self.miganie % 2 == 1:
+            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=True)
+        elif self.miganie % 2 == 0:
+            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, False, redraw=True)
+        self.miganie += 1
+
+    def Jedz(self):
+        if self.punkt == self.pozycje[-1]:
+            if self.kierunek == "gora":
+                self.pozycje.append(str(str((self.x%self.SIZE_LED))+str(((self.y-1)%self.SIZE_LED))))
+            elif self.kierunek == "dol":
+                self.pozycje.append(str(str((self.x % self.SIZE_LED)) + str(((self.y + 1) % self.SIZE_LED))))
+            elif self.kierunek == "lewo":
+                self.pozycje.append(str(str(((self.x-1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED))))
+            elif self.kierunek == "prawo":
+                self.pozycje.append(str(str(((self.x+1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED))))
+            else:
+                return 0
+            self.screen.pixel((int(self.pozycje[-1]) // 10), (int(self.pozycje[-1]) % 10), True, redraw=True)
+            self.Punkt()
+
     def processKey(self, key):
         if key == "6":
             self.kierunek = "prawo"
@@ -75,12 +110,15 @@ class Snake():
             self.kierunek = "dol"
 
 
-
 keyboard = Snake(6, 5, 22, 27, 17, 4, 3, 2)
-keyboard.Poczatek()
 
+keyboard.Poczatek()
+keyboard.Punkt()
 while True:
+
     time.sleep(keyboard.PRZERWA)
+    keyboard.Jedz()
+    keyboard.Miganie()
     keyboard.Usun()
     if keyboard.kierunek == "dol":
         keyboard.WDol()
