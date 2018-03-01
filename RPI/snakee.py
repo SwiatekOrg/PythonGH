@@ -17,7 +17,7 @@ class Snake():
         self.STARTX = 0
         self.STARTY = 5
         self.PRZERWA = 0.4
-
+        self.kierunek = "prawo"
         self.x = self.STARTX
         self.y = self.STARTY
         self.pozycje = []
@@ -64,76 +64,30 @@ class Snake():
     def WDol(self):
         self.y += 1
 
-    def LosowoCoKrok(self):
-        kierunek = randint(0,3)
-        if kierunek == 0:  #DoPrzodu
-            if self.poprzedni == 1:
-                self.DoTylu()
-                self.poprzedni = 1
-            else:
-                self.DoPrzodu()
-                self.poprzedni = 0
-        elif kierunek == 1: #DoTylu
-            if self.poprzedni == 0:
-                self.DoPrzodu()
-                self.poprzedni = 0
-            else:
-                self.DoTylu()
-                self.poprzedni = 1
-        elif kierunek == 2:  #WGore
-            if self.poprzedni == 3:
-                self.WDol()
-                self.poprzedni = 3
-            else:
-                self.WGore()
-                self.poprzedni = 2
-        elif kierunek == 3:   #WDol
-            if self.poprzedni == 2:
-                self.WGore()
-                self.poprzedni = 2
-            else:
-                self.WDol()
-                self.poprzedni = 3
-
-    def SnakeLive(self):
-        self.Poczatek()
-        while True:
-            time.sleep(self.PRZERWA)
-            self.Usun()
-            self.LosowoCoKrok()
-            self.Dodaj()
-
     def processKey(self, key):
         if key == "6":
-            while True:
-                time.sleep(self.PRZERWA)
-                self.Usun()
-                self.DoPrzodu()
-                self.Dodaj()
-
+            self.kierunek = "prawo"
         elif key == "4":
-            while True:
-                time.sleep(self.PRZERWA)
-                self.Usun()
-                self.DoTylu()
-                self.Dodaj()
-
+            self.kierunek = "lewo"
         elif key == "2":
-            while True:
-                time.sleep(self.PRZERWA)
-                self.Usun()
-                self.WGore()
-                self.Dodaj()
+            self.kierunek = "gora"
         elif key == "8":
-            while True:
-                time.sleep(self.PRZERWA)
-                self.Usun()
-                self.WDol()
-                self.Dodaj()
+            self.kierunek = "dol"
 
 
 
 keyboard = Snake(6, 5, 22, 27, 17, 4, 3, 2)
 keyboard.Poczatek()
+
 while True:
-    pass
+    time.sleep(keyboard.PRZERWA)
+    keyboard.Usun()
+    if keyboard.kierunek == "dol":
+        keyboard.WDol()
+    elif keyboard.kierunek == "gora":
+        keyboard.WGore()
+    elif keyboard.kierunek == "prawo":
+        keyboard.DoPrzodu()
+    elif keyboard.kierunek == "lewo":
+        keyboard.DoTylu()
+    keyboard.Dodaj()
