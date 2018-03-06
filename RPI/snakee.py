@@ -45,16 +45,16 @@ class Snake():
     def Poczatek(self):
         for i in range(0,self.SNAKE_SIZE):
             self.Dodaj()
-            self.screen.pixel(self.x%self.SIZE_LED, self.y%self.SIZE_LED, True, redraw=True)
+            self.screen.pixel(self.x%self.SIZE_LED, self.y%self.SIZE_LED, True, redraw=False)
             if i<self.SNAKE_SIZE-1:
                 self.x += 1
 
     def Dodaj(self):
-        self.screen.pixel(self.x % self.SIZE_LED, self.y % self.SIZE_LED, True, redraw=True)
+        self.screen.pixel(self.x % self.SIZE_LED, self.y % self.SIZE_LED, True, redraw=False)
         self.pozycje.append((str(self.x%self.SIZE_LED)+str(self.y%self.SIZE_LED)))
 
     def Usun(self):
-        self.screen.pixel((int(self.pozycje[0]) // 10),(int(self.pozycje[0]) % 10), False, redraw=True)
+        self.screen.pixel((int(self.pozycje[0]) // 10),(int(self.pozycje[0]) % 10), False, redraw=False)
         self.pozycje.remove(self.pozycje[0])
 
     def DoPrzodu(self):
@@ -82,7 +82,7 @@ class Snake():
                 self.screen.invert(False)
                 time.sleep(self.PRZERWA)
                 print("Game Over")
-                wait = input()
+                time.sleep(self.PRZERWA)
                 self.screen.clear()
                 sys.exit()
 
@@ -95,31 +95,34 @@ class Snake():
             if self.pozycje not in self.pozycje:
                 break
 
-        self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=True)
+        self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=False)
 
     def Miganie(self):
         if self.miganie % 2 == 1:
-            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=True)
+            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, True, redraw=False)
         elif self.miganie % 2 == 0:
-            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, False, redraw=True)
+            self.screen.pixel(int(self.punkt) // 10, int(self.punkt) % 10, False, redraw=False)
         self.miganie += 1
 
     def Jedz(self):
         if self.punkt == self.pozycje[-1]:
             if self.kierunek == "gora":
-                self.pozycje.append(str(str((self.x%self.SIZE_LED))+str(((self.y-1)%self.SIZE_LED))))
+                self.pozycje.insert(0,(str(str((self.x%self.SIZE_LED))+str(((self.y-1)%self.SIZE_LED)))))
             elif self.kierunek == "dol":
-                self.pozycje.append(str(str((self.x % self.SIZE_LED)) + str(((self.y + 1) % self.SIZE_LED))))
+                self.pozycje.insert(0,(str(str((self.x % self.SIZE_LED)) + str(((self.y + 1) % self.SIZE_LED)))))
             elif self.kierunek == "lewo":
-                self.pozycje.append(str(str(((self.x-1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED))))
+                self.pozycje.insert(0,(str(str(((self.x-1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED)))))
             elif self.kierunek == "prawo":
-                self.pozycje.append(str(str(((self.x+1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED))))
+                self.pozycje.insert(0,(str(str(((self.x+1) % self.SIZE_LED)) + str(((self.y) % self.SIZE_LED)))))
             else:
                 return 0
-            self.screen.pixel((int(self.pozycje[-1]) // 10), (int(self.pozycje[-1]) % 10), True, redraw=True)
+            self.screen.pixel((int(self.pozycje[0]) // 10), (int(self.pozycje[0]) % 10), True, redraw=False)
             self.Punkt()
             self.score += 1
             print("Score: " + str(self.score))
+
+    def Flush(self):
+        self.screen.flush()
 
     def processKey(self, key):
         if key == "6":
@@ -152,3 +155,4 @@ while True:
     elif keyboard.kierunek == "lewo":
         keyboard.DoTylu()
     keyboard.Dodaj()
+    keyboard.Flush()
