@@ -18,11 +18,16 @@ class Shop():
         print(" ")
 
     def getlogIn(self,id):
-        pin = input("Podaj PIN: ")
-        if id == 807818262888 and pin == 1234:
+        try:
+            pin = input("Podaj PIN: ")
+        except:
+            print("Zly pin")
+            sys.exit()
+
+        if id == 807818262888 and int(pin) == 1234:
             user.uzytkownik = "Mateusz Swiatek"
             user.money = 50.00
-        elif id == 277909100046 and pin == 6969:
+        elif id == 277909100046 and int(pin) == 6969:
             user.uzytkownik = "Kacper Krzoska"
             user.money = 100.00
         else:
@@ -35,10 +40,8 @@ class Shop():
         print("Money: "+ str(user.money))
 
     def Back(self):
-        try:
-            pause = input("Wcisnij klaiwsz by wrocic do menu...")
-        except SyntaxError:
-            pass
+        pause = raw_input("Wcisnij klaiwsz by wrocic do menu...")
+
 
 
 class Story():
@@ -48,6 +51,7 @@ class Story():
         self.what_do = 0
 
     def ShowStory(self):
+        print(" ")
         print("****PRZEDMIOTY****")
         for i in range(0,len(self.ListName)):
             print(str(i)+ ". " +self.ListName[i] + " - Cena: " + str(self.ListPrice[i]) + " zl")
@@ -62,19 +66,26 @@ class Story():
         print(" ")
 
 
-
 class Cart():
     def __init__(self):
         self.ItemList = []
         self.ItemsValue = 0
 
     def AddToCart(self,number):
-        self.ItemList.append(story.ListName[number])
-        self.ItemsValue += story.ListPrice[number]
+        if number > len(story.ListName)-1 or number < 0:
+            print("Zly numer")
+            shop.Back()
+        else:
+            self.ItemList.append(story.ListName[number])
+            self.ItemsValue += story.ListPrice[number]
 
     def DeleteFromCart(self,numer):
-        self.ItemsValue -= story.ListPrice[story.ListName.index(self.ItemList[numer])]
-        self.ItemList.remove(self.ItemList[numer])
+        if numer > len(self.ItemList)-1 or numer < 0:
+            print("Zly numer")
+            shop.Back()
+        else:
+            self.ItemsValue -= story.ListPrice[story.ListName.index(self.ItemList[numer])]
+            self.ItemList.remove(self.ItemList[numer])
 
     def ShowCart(self):
         for i in range(0,len(self.ItemList)):
@@ -92,7 +103,6 @@ class Cart():
             print("Zakupy udane, kwota zdjeta z konta")
 
 
-
 class User():
     def __init__(self,id):
         self.id = id
@@ -103,11 +113,11 @@ class User():
         print("Twoje srodki na koncie to: " + str(self.money) + "zl")
 
     def AddMoney(self):
-        dodac_srodki = input("Ile chcesz dodac srodow?: ")
+        dodac_srodki = int(raw_input("Ile chcesz dodac srodow?: "))
         self.money += dodac_srodki
 
     def TakeMoney(self):
-        ile = int(input("Jaka kwote chcesz wyplacic: "))
+        ile = int(raw_input("Jaka kwote chcesz wyplacic: "))
         if ile > self.money:
             print("Za malo srodkow na konice")
         else:
@@ -127,40 +137,46 @@ print("Zalogowany jako " + str(user.uzytkownik))
 
 while True:
     shop.ShowMenu()
-    co_robic = input("Wybierz numer: ")
+    co_robic = str(raw_input("Wybierz numer: "))
     print(" ")
-    if co_robic == 1:
+    if co_robic == "1":
         user.MonetState()
         shop.Back()
-        continue
-    elif co_robic == 2:
+    elif co_robic == "2":
         user.AddMoney()
         user.MonetState()
         shop.Back()
-        continue
-    elif co_robic == 3:
+    elif co_robic == "3":
         shop.ShowData()
         shop.Back()
-        continue
-    elif co_robic == 4:
+    elif co_robic == "4":
         user.TakeMoney()
         shop.Back()
-        continue
-    elif co_robic == 5:
-        story.ShowStory()
-        story.ShowOptions()
+    elif co_robic == "5":
         while True:
-            story.what_do = input("Co chcesz zrobic?: ")
-            if story.what_do == 1:
+            story.ShowStory()
+            story.ShowOptions()
+            story.what_do = str(raw_input("Co chcesz zrobic?: "))
+            print(" ")
+            if story.what_do == "1":
                 koszyk.End()
-            elif story.what_do == 2:
-                numer = input("Podaj numer przedmiotu z listy: ")
+                shop.Back()
+            elif story.what_do == "2":
+                numer = int(raw_input("Podaj numer przedmiotu z listy: "))
                 koszyk.AddToCart(numer)
-            elif story.what_do == 3:
-                numer = input("Podaj numer przedmiotu z koszyka: ")
+            elif story.what_do == "3":
+                numer = int(raw_input("Podaj numer przedmiotu z koszyka: "))
                 koszyk.DeleteFromCart(numer)
-            elif story.what_do == 4:
+            elif story.what_do == "4":
                 koszyk.ShowCart()
-            elif story.what_do == 5:
+                shop.Back()
+            elif story.what_do == "5":
                 break
-        continue
+            else:
+                print("Zly numer")
+                print(" ")
+
+    else:
+        print("Zly numer")
+
+
