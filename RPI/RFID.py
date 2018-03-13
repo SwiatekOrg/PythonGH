@@ -8,6 +8,10 @@ rfid = RFID()
 
 
 class Shop():
+    def __init__(self):
+        self.verify = 0
+
+
     def ShowMenu(self):
         print(" ")
         print("1. Sprawdz stan konta")
@@ -42,6 +46,13 @@ class Shop():
     def Back(self):
         pause = raw_input("Wcisnij klaiwsz by wrocic do menu...")
 
+    def Secutiry(self):
+        print("Przyloz karte aby zweryfikowac...")
+        ID = rfid.read_id()
+        if user.id == ID:
+            self.verify = 1
+        else:
+            self.verify = 0
 
 
 class Story():
@@ -64,7 +75,6 @@ class Story():
         print("4. Zobacz koszyk i jego wartosc")
         print("5. Wroc do menu")
         print(" ")
-
 
 class Cart():
     def __init__(self):
@@ -102,7 +112,6 @@ class Cart():
             self.ItemList[:] = []
             print("Zakupy udane, kwota zdjeta z konta")
 
-
 class User():
     def __init__(self,id):
         self.id = id
@@ -123,7 +132,6 @@ class User():
         else:
             self.money -= ile
             self.MonetState()
-
 
 
 shop = Shop()
@@ -150,6 +158,13 @@ while True:
         shop.ShowData()
         shop.Back()
     elif co_robic == "4":
+        shop.Secutiry()
+        if shop.verify:
+            print("Pomyslnie")
+        else:
+            print("Zla karta, powrot...")
+            shop.Back()
+            continue
         user.TakeMoney()
         shop.Back()
     elif co_robic == "5":
@@ -159,6 +174,13 @@ while True:
             story.what_do = str(raw_input("Co chcesz zrobic?: "))
             print(" ")
             if story.what_do == "1":
+                shop.Secutiry()
+                if shop.verify:
+                    print("Pomyslnie")
+                else:
+                    print("Zla karta, powrot...")
+                    shop.Back()
+                    continue
                 koszyk.End()
                 shop.Back()
             elif story.what_do == "2":
