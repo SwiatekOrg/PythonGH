@@ -1,10 +1,12 @@
-import random
 from random import randint
 
+MAP_SIZE =10
+
+
 class Position():
-    def __init__(self):
-        self._x = 0
-        self._y = 0
+    def __init__(self,x,y):
+        self._x = x
+        self._y = y
 
     def move(self, x):
         if x == "polnoc":
@@ -62,39 +64,23 @@ class Ekwipunek():
 
 
 class Item():
+    def __init__(self):
+        self.TablicaKartek = []
+
 
     def SetKartki(self,ile):
         for i in range(ile):
-            kartka = Position()
+            kartka = Position(randint(0,MAP_SIZE),randint(0,MAP_SIZE))
+            self.TablicaKartek[i] = kartka
+            if len(self.TablicaKartek) > 1:
+                for z in range(len(self.TablicaKartek)):
+                    if self.TablicaKartek[i].show == self.TablicaKartek[z+1]:
+                        self.TablicaKartek[i].setPosition(randint(MAP_SIZE),randint(MAP_SIZE))
 
 
+kartki = Item()
+kartki.SetKartki(4)
+print(kartki.TablicaKartek)
 
-ekwipunek_gracza = Ekwipunek()
-pozycja_gracza = Position()
-pozycja_gracza.setPosition(5,5)
 
-kartka1 = Position()
-kartka2 = Position()
-kartka3 = Position()
-kartka4 = Position()
-tablica_przedmiotow = [kartka1 , kartka2 , kartka3 , kartka4]
-
-for i in range(0,len(tablica_przedmiotow)):
-    tablica_przedmiotow[i].setPosition(randint(0,10),randint(0,10))
-    i = i + 1
-
-print("Kartki znajdują się na pozycjach(twoja to 5 5):")
-for i in range(0,len(tablica_przedmiotow)):
-    tablica_przedmiotow[i].show()
-    i = i + 1
-
-while True:
-    print("W którą stronę iść?(polnoc,poludnie,wschod,zachod)")
-    x = input()
-    pozycja_gracza.move(x)
-    for i in range(0,len(tablica_przedmiotow)):
-        if pozycja_gracza == tablica_przedmiotow[i]:
-            ekwipunek_gracza.addEq("kartka", 1)
-            print("Znalazłeś kartkę! Masz już "+str(ekwipunek_gracza.showValue('kartka')) + " kartek")
-        i = i + 1
 
