@@ -70,17 +70,29 @@ class Item():
 
     def SetKartki(self,ile):
         for i in range(ile):
-            kartka = Position(randint(0,MAP_SIZE),randint(0,MAP_SIZE))
-            self.TablicaKartek[i] = kartka
-            if len(self.TablicaKartek) > 1:
-                for z in range(len(self.TablicaKartek)):
-                    if self.TablicaKartek[i].show == self.TablicaKartek[z+1]:
-                        self.TablicaKartek[i].setPosition(randint(MAP_SIZE),randint(MAP_SIZE))
+            Kartka = Position(randint(0,MAP_SIZE),randint(0,MAP_SIZE))
+            self.TablicaKartek.insert(i,Kartka)
+
+    def ShowKartki(self):
+        print("Kartki znajdują się na pozycjach (twoja to " + str(pozycja_gracza._x)+","+str(pozycja_gracza._y) +"):")
+        for i in range(len(kartki.TablicaKartek)):
+            kartki.TablicaKartek[i].show()
 
 
+ekwipunek_gracza = Ekwipunek()
+pozycja_gracza = Position(5,5)
 kartki = Item()
 kartki.SetKartki(4)
-print(kartki.TablicaKartek)
 
 
 
+
+kartki.ShowKartki()
+while True:
+    print("W którą stronę iść?(polnoc,poludnie,wschod,zachod)")
+    x = input()
+    pozycja_gracza.move(x)
+    for i in range(len(kartki.TablicaKartek)):
+        if pozycja_gracza == kartki.TablicaKartek[i]:
+            ekwipunek_gracza.addEq("kartka", 1)
+            print("Znalazłeś kartkę! Masz już "+str(ekwipunek_gracza.showValue('kartka')) + " kartek")
