@@ -36,6 +36,9 @@ class Position():
     def show(self):
         print(self._x ,self._y)
 
+    def BackXY(self):
+        return self._x ,self._y
+
     def setPosition(self,x,y):
         self._x = x
         self._y = y
@@ -78,11 +81,32 @@ class Item():
         for i in range(len(kartki.TablicaKartek)):
             kartki.TablicaKartek[i].show()
 
+    def SprawdzKartki(self):
+        x = 0
+        y = 1
+        for i in range(10000):
+            if x == len(self.TablicaKartek)-1:
+                break
+            if self.TablicaKartek[x] == self.TablicaKartek[y]:
+                self.TablicaKartek[x].setPosition(randint(0, MAP_SIZE), randint(0, MAP_SIZE))
+                self.SprawdzKartki()
+            if y == len(self.TablicaKartek)-1:
+                x+=1
+                y = x + 1
+                continue
+            y += 1
+
+
+
+
+
 
 ekwipunek_gracza = Ekwipunek()
 pozycja_gracza = Position(5,5)
 kartki = Item()
-kartki.SetKartki(4)
+kartki.SetKartki(99)
+kartki.SprawdzKartki()
+
 
 
 
