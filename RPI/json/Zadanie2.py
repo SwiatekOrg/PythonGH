@@ -1,6 +1,8 @@
 import json
 import requests
 import sys
+import time
+
 
 headers = {'Content-Type': 'application/json; charset=utf-8'}
 url = "http://api.gios.gov.pl/pjp-api/rest/station/findAll"
@@ -30,4 +32,4 @@ for i in range(len(Czujniki)):
     for a in range(len(Czujniki[i])):
         czuj = requests.get('http://api.gios.gov.pl/pjp-api/rest/data/getData/'+str(Czujniki[i][a]['id']), headers)
         czuj_json = json.loads(czuj.content.decode('utf-8'))
-        print(str(czuj_json['key']) +" dla daty "+ str(czuj_json['values'][1]['date']) + " wartosc " + str(czuj_json['values'][1]['value']))
+        print(str(czuj_json['key']) +" dla "+ str( czuj_json['values'][1]['date']) + " minut temu wartosc " + str(czuj_json['values'][1]['value']))
