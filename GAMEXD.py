@@ -84,6 +84,12 @@ class Item():
     def SprawdzKartki(self):
         x = 0
         y = 1
+
+        for i in range(len(self.TablicaKartek)):
+            if pozycja_gracza == self.TablicaKartek[i]:
+                self.TablicaKartek[i].setPosition(randint(0, MAP_SIZE), randint(0, MAP_SIZE))
+                self.SprawdzKartki()
+
         for i in range(10000):
             if x == len(self.TablicaKartek)-1:
                 break
@@ -104,7 +110,7 @@ class Item():
 ekwipunek_gracza = Ekwipunek()
 pozycja_gracza = Position(5,5)
 kartki = Item()
-kartki.SetKartki(99)
+kartki.SetKartki(4)
 kartki.SprawdzKartki()
 
 
