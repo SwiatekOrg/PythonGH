@@ -30,10 +30,8 @@ for i in range(len(Czujniki)):
     print("")
     print(Krakow[i]['stationName'])
     for a in range(len(Czujniki[i])):
-
         czuj = requests.get('http://api.gios.gov.pl/pjp-api/rest/data/getData/'+str(Czujniki[i][a]['id']), headers)
         czuj_json = json.loads(czuj.content.decode('utf-8'))
-
         if czuj_json['values'][0]['value'] == None:
             if czuj_json['values'][1]['value'] == None:
                 number = 2
@@ -41,13 +39,8 @@ for i in range(len(Czujniki)):
                 number = 1
         else:
             number = 0
-
         czas = time.localtime()
-        dt_str = str(czuj_json['values'][number]['date'])
-        dt_obj = datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S')
-        czas = (str(str(czas[0]) + "-" + str(czas[1]) + "-" + str(czas[2]) + " " + str(czas[3]) + ":" + str(czas[4]) + ":" + str(czas[5])))
-        czas = datetime.strptime(czas, '%Y-%m-%d %H:%M:%S')
+        dt_obj = datetime.strptime(str(czuj_json['values'][number]['date']), '%Y-%m-%d %H:%M:%S')
+        czas = datetime.strptime((str(czas[0]) + "-" + str(czas[1]) + "-" + str(czas[2]) + " " + str(czas[3]) + ":" + str(czas[4]) + ":" + str(czas[5])), '%Y-%m-%d %H:%M:%S')
         minuta = int((czas.hour - dt_obj.hour) * 60 + (czas.minute - dt_obj.minute))
-
-
         print(str(czuj_json['key']) + " dla " + str(minuta) + " minut temu wartosc " + str(czuj_json['values'][number]['value']))
