@@ -47,9 +47,7 @@ for i in range(len(Czujniki)):
         dt_obj = datetime.strptime(dt_str, '%Y-%m-%d %H:%M:%S')
         czas = (str(str(czas[0]) + "-" + str(czas[1]) + "-" + str(czas[2]) + " " + str(czas[3]) + ":" + str(czas[4]) + ":" + str(czas[5])))
         czas = datetime.strptime(czas, '%Y-%m-%d %H:%M:%S')
-        godzina1 = [dt_obj.hour, dt_obj.minute]
-        godzina2 = [czas.hour, czas.minute]
-        minuta = int((godzina2[0] - godzina1[0]) * 60 + (godzina2[1] - godzina1[1]))
+        minuta = int((czas.hour - dt_obj.hour) * 60 + (czas.minute - dt_obj.minute))
 
 
         print(str(czuj_json['key']) + " dla " + str(minuta) + " minut temu wartosc " + str(czuj_json['values'][number]['value']))
