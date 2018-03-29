@@ -1,7 +1,6 @@
 import json
 import requests
 from datetime import datetime
-import time
 
 
 headers = {'Content-Type': 'application/json; charset=utf-8'}
