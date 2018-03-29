@@ -26,6 +26,7 @@ for i in range(len(Krakow)):
 #for i in range(len(Czujniki)):
     #print(Czujniki[i])
 
+current_time = datetime.now()
 for i in range(len(Czujniki)):
     print("")
     print(Krakow[i]['stationName'])
@@ -34,8 +35,7 @@ for i in range(len(Czujniki)):
         czujnik_json = json.loads(czujnik.content.decode('utf-8'))
         for x in range(len(czujnik_json['values'])):
             if czujnik_json['values'][x]['value'] != None:
-                number = x
+                existing_hour_index = x
                 break
-        czujnik_time = datetime.strptime(str(czujnik_json['values'][number]['date']), '%Y-%m-%d %H:%M:%S')
-        actual_time = datetime.now()
-        print(str(czujnik_json['key']) + " dla " + str(int((actual_time-czujnik_time).total_seconds()//60)) + " minut temu wartosc " + str(czujnik_json['values'][number]['value']))
+        czujnik_time = datetime.strptime(str(czujnik_json['values'][existing_hour_index]['date']), '%Y-%m-%d %H:%M:%S')
+        print(str(czujnik_json['key']) + " dla " + str(int((current_time-czujnik_time).total_seconds()//60)) + " minut temu wartosc " + str(czujnik_json['values'][existing_hour_index]['value']))
