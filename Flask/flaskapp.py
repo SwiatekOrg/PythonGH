@@ -30,14 +30,21 @@ def Table():
 
     dct = {}
     for i in range(len(Czujniki)):
-        print(len(Czujniki))
         dct['list_%s' % i] = []
         for a in range(len(Czujniki[i])):
-            print(len(Czujniki[i]))
             czujnik = requests.get('http://api.gios.gov.pl/pjp-api/rest/data/getData/' + str(Czujniki[i][a]['id']),headers)
             dct['list_%s' % i].append(json.loads(czujnik.content.decode('utf-8')))
 
-    return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct)
+    indexes = []
+    for i in range(len(Czujniki)):
+        for a in range(len(Czujniki[i])):
+            for z in range(len(dct['list_%s' % i][a]['values'])):
+                if dct['list_%s' % i][a]['values'][z]['value'] != None:
+                    indexes.append(z)
+                    break
+
+
+    return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct, existing_hour_index = indexes,b = [])
 
 if __name__ == '__main__':
     app.run(port=5011, debug=True)
