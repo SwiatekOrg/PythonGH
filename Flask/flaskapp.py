@@ -35,10 +35,7 @@ def Table():
         for a in range(len(Czujniki[i])):
             print(len(Czujniki[i]))
             czujnik = requests.get('http://api.gios.gov.pl/pjp-api/rest/data/getData/' + str(Czujniki[i][a]['id']),headers)
-            dct['list_%s' % i][a] = json.loads(czujnik.content.decode('utf-8'))
-    print(dct['list_0'][0])
-    print(dct['list_1'])
-    print(dct['list_3'])
+            dct['list_%s' % i].append(json.loads(czujnik.content.decode('utf-8')))
 
     return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct)
 

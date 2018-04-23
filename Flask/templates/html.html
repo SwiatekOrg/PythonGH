@@ -8,7 +8,7 @@
     <table border=1>
         {% for i in range(lista_czujnikow|length) %}
         <tr>
-            <th colspan="2"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
+            <th colspan="3"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
         </tr>
             {%for a in range(lista_czujnikow[i]|length)%}
             <tr>
@@ -17,6 +17,9 @@
                 </th>
                 <th>
                     {{ wartosci['list_%s' % i][a]['values'][0]['value']|int }}
+                </th>
+                <th>
+
                 </th>
             </tr>
             {% endfor %}
