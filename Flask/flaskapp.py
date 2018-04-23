@@ -44,7 +44,7 @@ def Table():
                     break
 
 
-    return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct, existing_hour_index = indexes,b = [])
+    return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct, existing_hour_index = indexes)
 
 if __name__ == '__main__':
     app.run(port=5011, debug=True)
