@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+</head>
+<body>
+    <table border=1>
+        {% for i in range(lista_czujnikow|length) %}
+        <tr>
+            <th colspan="2"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
+        </tr>
+            {%for a in range(lista_czujnikow[i]|length)%}
+            <tr>
+                <th>
+                    {{ wartosci['list_%s' % i][a]['key'] }}
+                </th>
+                <th>
+                    {{ wartosci['list_%s' % i][a]['values'][0]['value']|int }}
+                </th>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+</body>
+</html>
