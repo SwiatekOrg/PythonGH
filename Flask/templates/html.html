@@ -6,7 +6,6 @@
 </head>
 <body>
     <table border=1>
-        {% set b = 0 %}
         {% for i in range(lista_czujnikow|length) %}
         <tr>
             <th colspan="3"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
@@ -17,8 +16,8 @@
                     {{ wartosci['list_%s' % i][a]['key'] }}
                 </th>
                 <th>
-                    {{ wartosci['list_%s' % i][a]['values'][existing_hour_index[b]]['value'] }}
-                    {% set b = b + 1 %}
+
+                    {{ wartosci['list_%s' % i][a]['values'][existing_hour_index['list_%s' % i][a]]['value']|round(2, 'common') }}
                 </th>
                 <th>
 
