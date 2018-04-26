@@ -6,21 +6,21 @@
 </head>
 <body>
     <table border=1>
-        {% for i in range(lista_czujnikow|length) %}
+        {% for i in range(lista_czujnikow) %}
         <tr>
             <th colspan="3"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
         </tr>
-            {%for a in range(lista_czujnikow[i]|length)%}
+            {%for a in range(lista_czujnikow_len[i])%}
             <tr>
                 <th>
-                    {{ wartosci['list_%s' % i][a]['key'] }}
+                    {{ pierwiastek[i][a] }}
                 </th>
                 <th>
 
-                    {{ wartosci['list_%s' % i][a]['values'][existing_hour_index['list_%s' % i][a]]['value']|round(2, 'common') }}
+                    {{ wartosc[i][a]|round(2, 'common') }}
                 </th>
                 <th>
-                    {{ wartosci['list_%s' % i][a]['values'][existing_hour_index['list_%s' % i][a]]['date']}}
+                    {{ godzina[i][a]}}
                 </th>
             </tr>
             {% endfor %}

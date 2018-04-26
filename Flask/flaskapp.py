@@ -15,35 +15,37 @@ def Table():
     for i in range(len(response_json)):
         if str(response_json[i]['city']['name']) == "Kraków":
             Krakow.append(response_json[i])
-    #for i in range(len(Krakow)):
-        #print(Krakow[i])
 
     Czujniki = []
     for i in range(len(Krakow)):
         stace = requests.get('http://api.gios.gov.pl/pjp-api/rest/station/sensors/' + str(Krakow[i]['id']), headers)
-        stace_code = stace.status_code
         stace_json = json.loads(stace.content.decode('utf-8'))
         Czujniki.append(stace_json)
-    #for i in range(len(Czujniki)):
-        #print(Czujniki[i])
+    czujniki_len = len(Czujniki)
 
-    dct = {}
-    for i in range(len(Czujniki)):
-        dct['list_%s' % i] = []
-        for a in range(len(Czujniki[i])):
+    tab_czujniki_len = []
+    for i in range(czujniki_len):
+        tab_czujniki_len.append(len(Czujniki[i]))
+
+    pierwiastki = []
+    wartosci = []
+    godzina = []
+    for i in range(czujniki_len):
+        pierwiastki.append([])
+        wartosci.append([])
+        godzina.append([])
+        for a in range(tab_czujniki_len[i]):
             czujnik = requests.get('http://api.gios.gov.pl/pjp-api/rest/data/getData/' + str(Czujniki[i][a]['id']),headers)
-            dct['list_%s' % i].append(json.loads(czujnik.content.decode('utf-8')))
-
-    indexes = {}
-    for i in range(len(Czujniki)):
-        indexes['list_%s' % i] = []
-        for a in range(len(Czujniki[i])):
-            for z in range(len(dct['list_%s' % i][a]['values'])):
-                if dct['list_%s' % i][a]['values'][z]['value'] != None:
-                    indexes['list_%s' % i].append(z)
+            czujnik_json = json.loads(czujnik.content.decode('utf-8'))
+            for x in range(len(czujnik_json['values'])):
+                if czujnik_json['values'][x]['value'] != None:
+                    existing_hour_index = x
                     break
+            pierwiastki[i].append(czujnik_json['key'])
+            wartosci[i].append(float(czujnik_json['values'][existing_hour_index]['value']))
+            godzina[i].append(czujnik_json['values'][existing_hour_index]['date'])
 
-    return render_template('html.html', krakow = Krakow,lista_czujnikow = Czujniki, wartosci = dct, existing_hour_index = indexes)
+    return render_template('html.html', krakow = Krakow,lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, pierwiastek = pierwiastki, wartosc = wartosci, godzina = godzina)
 
 if __name__ == '__main__':
     app.run(port=5011, debug=True)
