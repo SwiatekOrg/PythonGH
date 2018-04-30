@@ -1,6 +1,7 @@
 from flask import Flask,render_template
 import json
 import requests
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -43,9 +44,18 @@ def Table():
                     break
             pierwiastki[i].append(czujnik_json['key'])
             wartosci[i].append(float(czujnik_json['values'][existing_hour_index]['value']))
-            godzina[i].append(czujnik_json['values'][existing_hour_index]['date'])
+            data = datetime.strptime(czujnik_json['values'][existing_hour_index]['date'], '%Y-%m-%d %H:%M:%S')
+            godzina[i].append(str(data.hour)+":"+str('%02d' % data.minute))
 
-    return render_template('html.html', krakow = Krakow,lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, pierwiastek = pierwiastki, wartosc = wartosci, godzina = godzina)
+
+    indeksy_powietrza = {'SO2':100,'NO2':100,'CO':6500,'PM10':60,'PM2.5':36,'O3':70,'C6H6':10}
+    procent_normy = []
+    for i in range(czujniki_len):
+        procent_normy.append([])
+        for a in range(tab_czujniki_len[i]):
+            procent_normy[i].append((wartosci[i][a] / indeksy_powietrza[pierwiastki[i][a]])*100)
+
+    return render_template('html.html', krakow = Krakow,lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, pierwiastek = pierwiastki, wartosc = wartosci, godzina = godzina, norma = procent_normy)
 
 if __name__ == '__main__':
     app.run(port=5011, debug=True)

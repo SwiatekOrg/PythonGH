@@ -8,7 +8,7 @@
     <table border=1>
         {% for i in range(lista_czujnikow) %}
         <tr>
-            <th colspan="3"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
+            <th colspan="4"><h3>{{ krakow[i]['stationName'] }}</h3> </th>
         </tr>
             {%for a in range(lista_czujnikow_len[i])%}
             <tr>
@@ -20,7 +20,10 @@
                     {{ wartosc[i][a]|round(2, 'common') }}
                 </th>
                 <th>
-                    {{ godzina[i][a]}}
+                    {{ godzina[i][a] }}
+                </th>
+                <th>
+                    {{ norma[i][a] | round(1, 'common') }} %
                 </th>
             </tr>
             {% endfor %}
