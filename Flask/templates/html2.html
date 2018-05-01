@@ -17,7 +17,7 @@
         {% for i in range(lista_czujnikow) %}
         <thead>
         <tr>
-            <th colspan="4"><h3><b>{{ all.streets[i].street }}</b></h3> </th>
+            <th colspan="4"><h3><b>{{ street[i] }}</b></h3> </th>
         </tr>
         </thead>
             <tr>
@@ -29,16 +29,16 @@
             {%for a in range(lista_czujnikow_len[i])%}
             <tr>
                 <td style="width: 200px">
-                    {{ all.streets[i].sensors[a].name }}
+                    {{ all[i][a][0] }}
                 </td>
                 <td style="width: 200px">
-                    {{ all.streets[i].sensors[a].value|round(2, 'common') }}
+                    {{ all[i][a][1]|round(2,'common') }}
                 </td>
                 <td style="width: 200px">
-                    {{ all.streets[i].sensors[a].time }}
+                    {{ all[i][a][2] }}
                 </td>
                 <td>
-                    {{ all.streets[i].sensors[a].percent | round(1, 'common') }} %
+                    {{ all[i][a][3]|round(2,'common') }} %
                 </td>
             </tr>
             {% endfor %}

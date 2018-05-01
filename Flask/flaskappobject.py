@@ -1,7 +1,4 @@
 from flask import Flask,render_template
-import json
-import requests
-from datetime import datetime
 from classes import Stations,Sensors,Sensor,Station
 
 app = Flask(__name__)
@@ -24,7 +21,21 @@ def Table():
         for a in range(tab_czujniki_len[i]):
             station.streets[i].sensors.append(Sensor('http://api.gios.gov.pl/pjp-api/rest/data/getData/' + str(Czujniki[i][a]['id'])))
 
-    return render_template('html2.html', krakow = city_stations,lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, all = station)
+    StreetNames =[]
+    AllData = []
+    for i in range(czujniki_len):
+        StreetNames.append(station.streets[i].street)
+        AllData.append([])
+        for a in range(tab_czujniki_len[i]):
+            AllData[i].append([])
+            AllData[i][a].append(station.streets[i].sensors[a].name)
+            AllData[i][a].append(station.streets[i].sensors[a].value)
+            AllData[i][a].append(station.streets[i].sensors[a].time)
+            AllData[i][a].append(station.streets[i].sensors[a].percent)
+
+    print(AllData)
+
+    return render_template('html2.html',lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, all = AllData, street = StreetNames)
 
 if __name__ == '__main__':
     app.run(port=5011, debug=True)

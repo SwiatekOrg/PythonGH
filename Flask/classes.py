@@ -58,8 +58,8 @@ class Sensor():
             self.percent = (self.value / indeksy_powietrza[self.name]) * 100
 
 
-
 class Station():
     def __init__(self,station_name):
         self.sensors = []
         self.street = station_name
+
