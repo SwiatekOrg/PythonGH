@@ -34,6 +34,6 @@ def Table():
             AllData[i][a].append(station.streets[i].sensors[a].percent)
 
     return render_template('html2.html',lista_czujnikow = czujniki_len,lista_czujnikow_len = tab_czujniki_len, all = AllData, street = StreetNames)
-\
+
 if __name__ == '__main__':
     app.run(port=5011, debug=True)
