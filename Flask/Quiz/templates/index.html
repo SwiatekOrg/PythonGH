@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz</title>
+</head>
+<body>
+    <form>
+        {% for value in quiz.items() %}
+
+            {{ value["question"] }}<Br>
+
+            {% for key in quiz[value].items() %}
+
+            <input type="radio" >{{ quiz[value]["options"][value] }}<br>
+
+            {% endfor %}
+        {% endfor %}
+
+
+
+
+    </form>
+</body>
+</html>
